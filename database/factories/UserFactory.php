@@ -21,3 +21,24 @@ $factory->define(App\User::class, function (Faker $faker) {
         'remember_token' => str_random(10),
     ];
 });
+
+$factory->define(App\Nuc::class, function(Faker $faker) {
+	$nuc = $faker->unique()->randomNumber(9);	
+	return[
+		'nuc' => $nuc	
+	];
+});
+
+
+
+$factory->define(App\Folio::class, function(Faker $faker) {
+	$numero = $faker->unique()->bothify('FGE-####????');
+	$nucs 		= App\Nuc::all();
+	$modulos 	= App\Modulo::all();
+
+	return[
+		'numero' => $numero,
+		'id_nuc' => (count($nucs) > 0) ? $faker->randomElement($nucs->pluck('id_nuc')->toArray()) : 0,
+		'id_modulo' => (count($modulos) > 0) ? $faker->randomElement($modulos->pluck('id_modulo')->toArray()) : 0,	
+	];
+});
