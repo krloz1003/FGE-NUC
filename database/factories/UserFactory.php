@@ -1,6 +1,7 @@
 <?php
 
 use Faker\Generator as Faker;
+use Carbon\Carbon;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,7 +24,13 @@ $factory->define(App\User::class, function (Faker $faker) {
 });
 
 $factory->define(App\Nuc::class, function(Faker $faker) {
-	$nuc = $faker->unique()->randomNumber(9);	
+
+    $nuc = App\Nuc::orderby('nuc','DESC')->take(1)->pluck('nuc');
+    $numero = (int)substr($nuc,4,6);
+    $numero = $numero+1;
+    $numero = str_pad($numero, 6, "0", STR_PAD_LEFT);
+
+	$nuc = Carbon::now()->formatLocalized('%y').$numero.$faker->bothify('#?#?#?');
 	return[
 		'nuc' => $nuc	
 	];
