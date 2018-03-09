@@ -17,6 +17,7 @@ class NucController extends APIBaseController
     {
     	$nucs = Nuc::all();
     	return $this->sendResponse($nucs->toArray(), 'La consulta fue satisfactoria.');   	
+
     }
 
     public function store(Request $request)
@@ -38,7 +39,7 @@ class NucController extends APIBaseController
         
         // Generación del NUC y guardar en la tabla    
         $nuc = new Nuc;
-		$nuc->nuc = Carbon::now()->formatLocalized('%Y').mt_rand(100000, 999999);
+		$nuc->nuc = $this->calculateNuc();
 		$nuc->save();
 
         if (is_null($nuc)) {            
