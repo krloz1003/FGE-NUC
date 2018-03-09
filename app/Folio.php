@@ -10,7 +10,12 @@ class Folio extends Model
 
     protected $fillable = ['numero', 'id_modulo', 'id_nuc'];
 
-    protected $primaryKey = 'id_folio'; 	
+    protected $primaryKey = 'id_folio'; 
+
+    public function setNumeroAttribute($value)
+    {
+        $this->attributes['numero'] = mb_strtoupper($value,'utf-8');
+    }    
     
     public function nucs()
     {

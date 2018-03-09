@@ -10,7 +10,12 @@ class Nuc extends Model
 
     protected $fillable = ['nuc', 'estatus'];
 
-    protected $primaryKey = 'id_nuc'; 	
+    protected $primaryKey = 'id_nuc'; 
+
+    public function setNucAttribute($value)
+    {
+        $this->attributes['nuc'] = mb_strtoupper($value,'utf-8');
+    }
     
     public function folio()
     {
