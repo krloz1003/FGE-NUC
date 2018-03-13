@@ -15,8 +15,10 @@ class NucController extends APIBaseController
     
     public function index()
     {
-    	$nucs = Nuc::all();
-    	return $this->sendResponse($nucs->toArray(), 'La consulta fue satisfactoria.');   	
+    	//$nucs = Nuc::all();
+    	//return $this->sendResponse($nucs->toArray(), 'La consulta fue satisfactoria.');
+        dd($this->calculateNuc());
+        //dd($this->is_valid_luhn('545762389823411'));
 
     }
 
