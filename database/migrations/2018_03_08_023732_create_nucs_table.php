@@ -15,7 +15,7 @@ class CreateNucsTable extends Migration
     {
         Schema::create('nucs', function (Blueprint $table) {
             $table->increments('id_nuc');
-            $table->string('nuc')->unique;
+            $table->string('nuc')->unique();
             $table->boolean('estatus')->default('1');
             $table->timestamps();
         });

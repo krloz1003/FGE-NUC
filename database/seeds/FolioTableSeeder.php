@@ -11,6 +11,6 @@ class FolioTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Folio::class, 10)->create();
+        factory(App\Folio::class, 1)->create();
     }
 }
