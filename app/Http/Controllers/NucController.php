@@ -17,8 +17,20 @@ class NucController extends APIBaseController
     {
     	$nucs = Nuc::all();
     	return $this->sendResponse($nucs->toArray(), 'La consulta fue satisfactoria.');
+    }
 
-
+    public function shownew($nuc)
+    {
+        $nuc = NUC::select('id_nuc', 'nuc', 'estatus', 'created_at')->where('nuc',$nuc)->first();
+        $folios = Folio
+                    ::join('modulos','folios.id_modulo', '=', 'modulos.id_modulo')
+                    ->where('id_nuc', $nuc->id_nuc)
+                    ->select('folios.numero', 'modulos.nombre as modulo', 'folios.created_at')
+                    ->getQuery()
+                    ->get();
+        $nuc = $nuc->toArray();        
+        array_push($nuc, $folios);
+        return $this->sendResponse($nuc, 'La consulta fue satisfactoria.');        
     }
 
     public function store(Request $request)
