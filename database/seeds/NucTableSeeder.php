@@ -25,7 +25,7 @@ class NucTableSeeder extends Seeder
             $numero = (int)substr($nuc,4,6);
             $numero = $numero+1;
             $numero = str_pad($numero, 6, "0", STR_PAD_LEFT);
-            $numero =  Carbon\Carbon::now()->formatLocalized('%y').$numero.$faker->bothify('#?#?#?');            
+            $numero =  Carbon\Carbon::now()->formatLocalized('%y').$numero.$faker->bothify('###');            
             
             $nuc = new Nuc();
             $nuc->nuc = $numero;
