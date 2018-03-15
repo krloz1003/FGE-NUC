@@ -16,14 +16,14 @@ class NucController extends APIBaseController
     public function index()
     {
     	$nucs = Nuc::all();
-    	return $this->sendResponse($nucs->toArray(), 'La consulta fue satisfactoria.');   	
+    	return $this->sendResponse($nucs->toArray(), 'La consulta fue satisfactoria.');
+
 
     }
 
     public function store(Request $request)
     {
         $input = $request->all();
-        //$numero =$request->input('numero');
         
         $validator = Validator::make($input, [
             'numero' => 'required',
@@ -34,9 +34,6 @@ class NucController extends APIBaseController
             return $this->sendError('Validation Error. ', $validator->errors());
         }
 
-        // Consultar id del modulo;
-        //$id_modulo = Modulo::where('nombre', $request->input('modulo'))->value('id_modulo');
-        
         // Generación del NUC y guardar en la tabla    
         $nuc = new Nuc;
 		$nuc->nuc = $this->calculateNuc();
@@ -57,6 +54,6 @@ class NucController extends APIBaseController
             return $this->sendResponse('Al parecer tuvimos un inconveniente al generar el NUC. Intente de nuevo.');       
         }         
         
-        return $this->sendResponse($nuc->nuc,'EL Nuc se ha generado correctamente.');        
+        return $this->sendResponse($nuc->nuc,'EL Nuc se ha generado correctamente.');
     }
 }
